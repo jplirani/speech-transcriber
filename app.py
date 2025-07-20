@@ -8,9 +8,9 @@ audio = st.file_uploader("Upload an audio file", type=["wav","mp3","m4a","ogg","
 if audio:
     ext = Path(audio.name).suffix           # get ".ogg", ".mp3", etc.
     temp_path = f"temp_audio{ext}"          # e.g. "temp_audio.ogg"
-    with open(temp_path, "wb") as f:
-        f.write(audio.read())
+    audio_bytes = audio.read()
     st.write("🔑 Key present?  ", st.secrets["openai"]["key"])
-    text = transcribe(temp_path)
+    audio_bytes = audio.read()  # Get bytes
+    text = transcribe(audio_bytes, audio.name)
     st.text_area("Transcript", text, height=300)
     st.download_button("Copy transcript", text, file_name="transcript.txt")
