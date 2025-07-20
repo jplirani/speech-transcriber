@@ -4,12 +4,14 @@ __pycache__/
 *$py.class
 
 # Virtual env
-.env/
 .env
 .venv/
-
+venv/
 # VS Code
 .vscode/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Temporary audio uploads
+temp_audio*
