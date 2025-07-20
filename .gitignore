@@ -5,8 +5,11 @@ __pycache__/
 
 # Virtual env
 .env/
+.env
 venv/
 
 # VS Code
 .vscode/
-    
+
+# Streamlit
+.streamlit/secrets.toml
