@@ -10,7 +10,6 @@ if audio:
     temp_path = f"temp_audio{ext}"          # e.g. "temp_audio.ogg"
     audio_bytes = audio.read()
     st.write("🔑 Key present?  ", bool(st.secrets["openai"]["key"]))
-    audio_bytes = audio.read()  # Get bytes
     text = transcribe(audio_bytes, audio.name)
     st.text_area("Transcript", text, height=300)
     st.download_button("Copy transcript", text, file_name="transcript.txt")
