@@ -20,7 +20,7 @@ def transcribe_from_file(filepath: str) -> str:
     )
     return transcription     
 
-def transcribe(audio_bytes: bytes,filepath: str) -> str:
+def transcribe(audio_bytes: bytes,filename: str) -> str:
     """Return transcript of the audio file at audio_path."""
     OPENAI_KEY = st.secrets["openai"]["key"]
     if OPENAI_KEY is None:
