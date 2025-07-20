@@ -5,7 +5,7 @@ import streamlit as st
 #load_dotenv()
 #OPENAI_KEY = os.getenv("OPENAI_KEY")
 
-def transcribe(filepath: str) -> str:
+def transcribe_from_file(filepath: str) -> str:
     """Return transcript of the audio file at audio_path."""
     OPENAI_KEY = st.secrets["openai"]["key"]
     if OPENAI_KEY is None:
@@ -17,4 +17,19 @@ def transcribe(filepath: str) -> str:
     file=audio_file,
     response_format="text"
     )
-    return transcription        
+    return transcription     
+
+def transcribe(audio_bytes: bytes,filepath: str) -> str:
+    """Return transcript of the audio file at audio_path."""
+    OPENAI_KEY = st.secrets["openai"]["key"]
+    if OPENAI_KEY is None:
+        raise RuntimeError("Please set the OPENAI_KEY environment variable")
+    client = OpenAI(api_key = OPENAI_KEY)
+    audio_file = io.BytesIO(audio_bytes)
+    audio_file.name = filename
+    transcription = client.audio.transcriptions.create(
+    model="whisper-1",
+    file=audio_file,
+    response_format="text"
+    )
+    return transcription     
