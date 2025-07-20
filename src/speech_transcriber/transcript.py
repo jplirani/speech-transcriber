@@ -13,7 +13,7 @@ if OPENAI_KEY is None:
 def transcribe(filepath: str) -> str:
     """Return transcript of the audio file at audio_path."""
     client = OpenAI(api_key = OPENAI_KEY)
-    audio_file = open(filename, "rb")
+    audio_file = open(filepath, "rb")
     transcription = client.audio.transcriptions.create(
     model="whisper-1",
     file=audio_file,
