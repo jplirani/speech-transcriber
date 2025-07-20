@@ -1,0 +1,10 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "speech-transcriber"
+version = "0.1.0"
+description = "Drag‐and‐drop speech‐to‐text app using Streamlit"
+authors = [{ name="Your Name", email="you@example.com" }]
+    
