@@ -1,6 +1,7 @@
 import streamlit as st
 from pathlib import Path
 from speech_transcriber.transcript import transcribe
+import pyperclip
 
 st.title("🗣️ Speech Transcriber")
 
@@ -13,14 +14,8 @@ if audio:
     text = transcribe(audio_bytes, audio.name)
     st.text_area("Transcript", text, height=300)
     st.download_button("Download transcript", text, file_name="transcript.txt")
-    # 2️⃣ Copy button
-    # We use backticks to wrap the JS template literal; if your transcript has backticks,
-    # you may need to escape them or fall back to the JSON‑dump approach.
-    st.markdown(f'''
-        <button 
-            onclick="navigator.clipboard.writeText(`{text}`)"
-            style="padding:0.35em 0.75em; margin-top:0.5em; font-size:1em;"
-        >📋 Copy transcript</button>
-        ''',
-        unsafe_allow_html=True
-    )
+    # Native Streamlit copy button, using a hidden <textarea> and execCommand
+    if st.button("📋 Copy transcript"):
+        # Escape HTML so nothing breaks our hidden textarea
+        pyperclip.copy(text)     
+        st.success("✅ Transcript copied to clipboard!")
